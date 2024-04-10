@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Board</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        rect {
+            stroke: black;
+            stroke-width: 2;
+        }
+        text {
+            font-size: 16px;
+            font-weight: bold;
+            text-anchor: middle;
+            /* dominant-baseline: central; */
+        }
+    </style>
+</head>
+<body>
+    <!-- First visualization -->
+    <div style="float: left; margin-right: 20px;">
+        <svg width="600" height="600"></svg>
+    </div>
+
+    <!-- Second visualization -->
+    <div style="float: left;">
+        <svg width="400" height="400"></svg>
+    </div>
+
+    <script>
+        const boardSize = 8;
+        const cellSize = 60;
+
+        const svg1 = d3.select("svg:nth-child(1)");
+
+        for (let i = 0; i < boardSize; i++) {
+            for (let j = 0; j < boardSize; j++) {
+                const x = j * cellSize;
+                const y = i * cellSize;
+
+                const position = String.fromCharCode(97 + j) + (boardSize - i);
+                
+                svg1.append("rect")
+                    .attr("x", x)
+                    .attr("y", y)
+                    .attr("width", cellSize)
+                    .attr("height", cellSize)
+                    .attr("fill", (i + j) % 2 === 0 ? "white" : "gray");
+
+                svg1.append("text")
+                    .attr("x", x + cellSize / 2)
+                    .attr("y", y + cellSize / 2)
+                    .text(position)
+                    .attr("fill", (i + j) % 2 === 0 ? "black" : "white");
+            }
+        }
+
+        // Add the chess board visualization here
+        const svg2 = d3.select("svg:nth-child(2)");
+
+        // Add your code for the chess board visualization here
+    </script>
+</body>
+</html>

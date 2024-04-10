@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Board</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        rect {
+            stroke: black;
+            stroke-width: 2;
+        }
+        text {
+            font-size: 16px;
+            font-weight: bold;
+            text-anchor: middle;
+            /* dominant-baseline: central; */
+        }
+    </style>
+</head>
+<body>
+    <svg width="900" height="900"></svg>
+
+    <script>
+        const boardSize = 8;
+        const cellSize = 60;
+
+        const svg = d3.select("svg");
+
+        for (let i = 0; i < boardSize; i++) {
+            for (let j = 0; j < boardSize; j++) {
+                const x = j * cellSize;
+                const y = i * cellSize;
+
+                const position = String.fromCharCode(97 + j) + (boardSize - i);
+                
+                svg.append("rect")
+                    .attr("x", x)
+                    .attr("y", y)
+                    .attr("width", cellSize)
+                    .attr("height", cellSize)
+                    .attr("fill", (i + j) % 2 === 0 ? "white" : "gray");
+
+                svg.append("text")
+                    .attr("x", x + cellSize / 2)
+                    .attr("y", y + cellSize / 2)
+                    .text(position)
+                    .attr("fill", (i + j) % 2 === 0 ? "black" : "white");
+            }
+        }
+    </script>
+</body>
+</html>
